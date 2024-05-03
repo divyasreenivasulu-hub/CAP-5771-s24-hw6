@@ -2,7 +2,7 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.typing import NDArray
-from sklearn.metrics import confusion_matrix
+#from sklearn.metrics import confusion_matrix
 
 # ----------------------------------------------------------------------
 
@@ -25,6 +25,36 @@ def compute_SSE(data, labels):
         cluster_center = np.mean(cluster_points, axis=0)
         sse += np.sum((cluster_points - cluster_center) ** 2)
     return sse
+
+
+def compute_confusion_matrix(true_labels: np.ndarray, predicted_labels: np.ndarray) -> np.ndarray:
+    """
+    Compute the confusion matrix for evaluating the performance of a classification algorithm.
+
+    Parameters:
+    - true_labels: numpy array of shape (n,) containing the true labels
+    - predicted_labels: numpy array of shape (n,) containing the predicted labels
+
+    Returns:
+    - confusion_matrix: numpy array of shape (num_classes, num_classes) representing the confusion matrix
+    """
+    unique_labels = np.unique(true_labels)
+    num_classes = len(unique_labels)
+    confusion_matrix = np.zeros((num_classes, num_classes), dtype=int)
+
+    for i in range(num_classes):
+        true_mask = (true_labels == unique_labels[i])
+        for j in range(num_classes):
+            predicted_mask = (predicted_labels == unique_labels[j])
+            confusion_matrix[i, j] = np.sum(true_mask & predicted_mask)
+
+    return confusion_matrix
+
+# Example usage:
+#true_labels = np.array([0, 0, 1, 1, 0, 1])
+#predicted_labels = np.array([1, 1, 0, 0, 1, 0])
+#conf_matrix = compute_confusion_matrix(true_labels, predicted_labels)
+#print(conf_matrix)
 
 
 def compute_ARI(confusion_matrix: NDArray[np.int32]):
@@ -310,7 +340,7 @@ def gaussian_mixture():
         # print("means: ", means)
         # print("weights: ", weights)
         # match the labels
-        confusion_mat = confusion_matrix(label_samples, predicted_labels)
+        confusion_mat = compute_confusion_matrix(label_samples, predicted_labels)
         # answers["confusion_matrix"] = confusion_mat
 
         ARI = adjusted_rand_index(label_samples, predicted_labels)
