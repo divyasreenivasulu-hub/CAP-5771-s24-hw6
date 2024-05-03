@@ -50,13 +50,6 @@ def compute_confusion_matrix(true_labels: np.ndarray, predicted_labels: np.ndarr
 
     return confusion_matrix
 
-# Example usage:
-#true_labels = np.array([0, 0, 1, 1, 0, 1])
-#predicted_labels = np.array([1, 1, 0, 0, 1, 0])
-#conf_matrix = compute_confusion_matrix(true_labels, predicted_labels)
-#print(conf_matrix)
-
-
 def compute_ARI(confusion_matrix: NDArray[np.int32]):
     """
     Compute the Adjusted Rand Index (ARI) metric for evaluating the performance of a clustering algorithm.
