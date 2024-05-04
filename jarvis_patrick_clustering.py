@@ -166,7 +166,7 @@ def jarvis_patrick_clustering():
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
     plt.colorbar(label='Clustering')
-    plt.grid(True)
+    plt.grid()
     pdf_pages.savefig()
     plt.close()
 
@@ -181,7 +181,7 @@ def jarvis_patrick_clustering():
     plt.xlabel('k')
     plt.ylabel('smin')
     plt.colorbar()
-    plt.grid(True)
+    plt.grid()
     pdf_pages.savefig()
     plt.close()
 
