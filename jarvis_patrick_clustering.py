@@ -129,7 +129,7 @@ def jarvis_patrick_clustering():
     labels_subset = labels_subset[:1000]
 
     k_range = [3, 4, 5, 6, 7, 8]
-    s_min_range = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    s_min_range = [4, 5, 6, 7, 8, 9, 10]
 
     num_trials = 10
 
@@ -177,10 +177,10 @@ def jarvis_patrick_clustering():
     plt.figure(figsize=(8, 6))
     plt.scatter(np.tile(k_values, len(s_min_range)), np.repeat(s_min_values, len(k_range)), c =sse_scores.flatten(),
                         cmap='viridis', s=25)
-    plt.title("sse with diff k_values and s_min")
+    plt.title("clusters with smallest SSE")
     plt.xlabel('k')
     plt.ylabel('smin')
-    plt.colorbar(label='clustering')
+    plt.colorbar()
     plt.grid(True)
     pdf_pages.savefig()
     plt.close()
@@ -188,10 +188,10 @@ def jarvis_patrick_clustering():
     plt.figure(figsize=(8, 6))
     plt.scatter(np.tile(k_values, len(s_min_range)), np.repeat(s_min_values, len(k_range)), c =ari_scores.flatten(),
                         cmap='viridis', s=25)
-    plt.title("ari with diff k_values and s_min")
+    plt.title("cluster with largest ARI")
     plt.xlabel('k')
     plt.ylabel('smin')
-    plt.colorbar(label='clustering')
+    plt.colorbar()
     plt.grid(True)
     pdf_pages.savefig()
     plt.close()
